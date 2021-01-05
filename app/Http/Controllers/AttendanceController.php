@@ -50,14 +50,16 @@
 
         public function deleteAllStudentAttendance($student_id){
             $attendance = Attendance::where('student_id',$student_id)->get();
-            $attendance->delete();
+                          Attendance::where('student_id',$student_id)->delete();
+            // $attendance->delete();
 
             return $this->successResponse('Students Attendance Succesfully Deleted');
         }
 
         public function deleteAllEventAttendance($event_id){
             $attendance = Attendance::where('event_id',$event_id)->get();
-            $attendance->delete();
+                          Attendance::where('event_id',$event_id)->delete();
+            // $attendance->delete();
 
             return $this->successResponse('All Event Attendance Succesfully Deleted');
         }

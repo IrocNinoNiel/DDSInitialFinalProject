@@ -27,11 +27,6 @@ $router->group(['prefix' => 'api/student'],function () use ($router) {
 
 });
 
-// Api User
-$router->group(['prefix' => 'api/user'],function () use ($router) {
-    $router->post('/login',['uses' => 'UserController@verifyUser']);
-});
-
 // Api Event
 $router->group(['prefix' => 'api/event'],function () use ($router) {
     $router->get('/get',['uses' => 'EventController@getEvents']);
@@ -42,7 +37,7 @@ $router->group(['prefix' => 'api/event'],function () use ($router) {
 
 });
 
-// Api Attendance (Still not Tested)
+// Api Attendance
 $router->group(['prefix' => 'api/attendance'],function () use ($router) {
     $router->get('/get',['uses' => 'AttendanceController@getAttendances']);
     $router->get('/get/event/{event_id}',['uses' => 'AttendanceController@getEventAttendance']);
@@ -51,4 +46,28 @@ $router->group(['prefix' => 'api/attendance'],function () use ($router) {
     $router->delete('/delete/student/{student_id}',['uses' => 'AttendanceController@deleteAllStudentAttendance']);
     $router->delete('/delete/event/{event_id}',['uses' => 'AttendanceController@deleteAllEventAttendance']);
     
+});
+
+// Api User
+$router->group(['prefix' => 'api/user'],function () use ($router) {
+    $router->get('/get',['uses' => 'UserController@getUsers']);
+    $router->get('/get/{user_id}',['uses' => 'UserController@getUser']);
+    $router->post('/add',['uses' => 'UserController@addUser']);
+    $router->delete('/delete/{user_id}',['uses' => 'UserController@deleteUser']);
+    $router->put('/edit/{user_id}',['uses' => 'UserController@updateUser']);
+
+    $router->post('/login',['uses' => 'UserController@verifyUser']);
+   
+});
+
+
+// Api Fee
+$router->group(['prefix' => 'api/fee'],function () use ($router) {
+    $router->get('/get',['uses' => 'FeeController@getFees']);
+    $router->get('/get/{fee_id}',['uses' => 'FeeController@getFee']);
+    $router->get('/get/student/{student_id}',['uses' => 'FeeController@findIfStudentPay']);
+    $router->post('/add',['uses' => 'FeeController@addFee']);
+    $router->put('/edit/{fee_id}',['uses' => 'FeeController@updateFee']);
+    $router->delete('/delete/{student_id}',['uses' => 'FeeController@deleteStudentFee']);
+
 });

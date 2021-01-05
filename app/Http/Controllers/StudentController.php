@@ -42,14 +42,6 @@
 
             $this->validate($request, $rules);
 
-            $rules = [
-                'user_name' => 'required|max:50',
-                'user_pass' => 'required:max:20',
-            ];
-
-            $this->validate($request, $rules);
-
-
             $student = new Student;
 
             $student->student_name = $request->student_name;
@@ -62,16 +54,6 @@
             $student->security_key = 'h5h7ecDMZPoTog4x6rrHyclkdoW2laA1';
 
             $student->save();
-
-            $user = new User;
-
-            $user->user_name = $request->user_name;
-            $user->user_pass = $request->user_pass;
-            $user->student_id = $student->student_id;
-            $user->teacher_id  = null;
-            $user->role_id = 2;
-
-            $user->save();
             
             return $this->successResponse($student);
         }
